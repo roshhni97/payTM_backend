@@ -16,10 +16,8 @@ const signupBody = z.object({
 });
 
 router.post("/signup", async (req, res) => {
-  console.log(req.body);
   // const { successData } = signupBody.safeParse(req.body);
   const successData = req.body;
-  console.log(successData);
   if (!successData) {
     res.status(400).json({
       message: "Incorrect Inputs",
@@ -127,12 +125,12 @@ router.get("/bulk", authMiddleware, async (req, res) => {
     $or: [
       {
         firstName: {
-          $regex: filter,
+          $regex: new RegExp(filter, "i"),
         },
       },
       {
         lastName: {
-          $regex: filter,
+          $regex: new RegExp(filter, "i"),
         },
       },
     ],

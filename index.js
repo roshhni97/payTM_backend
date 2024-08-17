@@ -3,6 +3,7 @@ const rootRouter = require("./routes");
 const cors = require("cors");
 const mongoose = require("mongoose");
 require("dotenv").config();
+const port = process.env.PORT || 3100;
 
 const app = express();
 console.log("app started");
@@ -11,8 +12,7 @@ app.use(express.json());
 
 app.use("/api/v1/", rootRouter);
 
-app.listen(3100);
-
+app.listen(port);
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
 
 mongoose.connection.on("error", (err) => {
